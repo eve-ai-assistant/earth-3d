@@ -352,16 +352,52 @@
         /* === Responsive Layout === */
         @media (max-width: 768px) {
             header {
-                top: 30px;
-                left: 30px;
+                top: 20px !important;
+                left: 20px !important;
             }
-            h1 { font-size: 28px; }
+            h1 { 
+                font-size: 20px !important;
+                letter-spacing: 0.8px !important;
+            }
+            .subtitle {
+                font-size: 9px !important;
+                letter-spacing: 2px !important;
+            }
             #hint { display: none; }
+            #settings-panel {
+                top: auto !important;
+                bottom: 80px !important;
+                right: 50% !important;
+                transform: translateX(50%) !important;
+                width: calc(100vw - 40px) !important;
+                max-width: 320px !important;
+                padding: 16px !important;
+                border-radius: 16px !important;
+            }
+            .settings-title {
+                font-size: 10px !important;
+                margin-bottom: 12px !important;
+            }
+            .slider-label, .checkbox-group label {
+                font-size: 10px !important;
+            }
+            input[type="range"] {
+                height: 6px !important;
+            }
+            input[type="range"]::-webkit-slider-thumb {
+                width: 20px !important;
+                height: 20px !important;
+            }
+            .marker {
+                width: 24px !important;
+                height: 24px !important;
+            }
             #info-card {
-                width: calc(100% - 40px);
-                right: 20px;
-                bottom: 20px;
-                left: 20px;
+                width: calc(100% - 40px) !important;
+                right: 20px !important;
+                bottom: 20px !important;
+                left: 20px !important;
+                padding: 20px !important;
             }
         }
     </style>
