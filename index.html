@@ -266,15 +266,15 @@
         }
         .settings-toggle-btn {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 28px;
-            height: 28px;
-            background: rgba(255, 255, 255, 0.08);
+            top: 16px;
+            right: 16px;
+            width: 24px;
+            height: 24px;
+            background: transparent;
             border: none;
-            border-radius: 50%;
-            color: #fff;
-            font-size: 20px;
+            border-radius: 0;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 18px;
             font-weight: 300;
             cursor: pointer;
             display: flex;
@@ -282,15 +282,17 @@
             justify-content: center;
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 100;
+            padding: 0;
+            line-height: 1;
         }
         .settings-toggle-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
             transform: rotate(90deg);
         }
         #settings-panel.minimized {
-            padding: 12px 24px !important;
-            width: auto !important;
-            min-width: 50px;
+            padding: 8px 12px !important;
+            width: 44px !important;
+            min-width: 44px !important;
         }
         #settings-panel.minimized .settings-title,
         #settings-panel.minimized .slider-group,
@@ -301,9 +303,19 @@
             position: static;
             transform: rotate(0);
         }
+        #settings-panel.minimized .settings-toggle-btn {
+            position: static;
+            transform: rotate(0);
+            width: 100%;
+            height: 100%;
+        }
         #settings-panel.minimized .settings-toggle-btn::after {
             content: '⚙';
-            font-size: 18px;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        #settings-panel.minimized .settings-toggle-btn:hover::after {
+            color: #fff;
         }
         #settings-panel.minimized .settings-toggle-btn span {
             display: none;
@@ -424,8 +436,10 @@
                 bottom: 20px !important;
                 right: 20px !important;
                 left: auto !important;
-                width: 50px !important;
-                padding: 12px !important;
+                width: 44px !important;
+                height: 44px !important;
+                padding: 0 !important;
+                border-radius: 50% !important;
             }
             .settings-title {
                 font-size: 10px !important;
