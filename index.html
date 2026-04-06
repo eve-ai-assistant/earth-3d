@@ -99,6 +99,7 @@
             top: 45px;
             left: 45px;
             animation: fadeDown 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            z-index: 100;
         }
         h1 {
             font-size: 32px;
@@ -408,18 +409,22 @@
         /* === Responsive Layout === */
         @media (max-width: 768px) {
             header {
-                top: 20px !important;
-                left: 20px !important;
+                top: 15px !important;
+                left: 15px !important;
             }
             h1 { 
-                font-size: 20px !important;
-                letter-spacing: 0.8px !important;
+                font-size: 18px !important;
+                letter-spacing: 0.6px !important;
+                text-shadow: 0 2px 8px rgba(0,0,0,0.8);
             }
             .subtitle {
-                font-size: 9px !important;
-                letter-spacing: 2px !important;
+                font-size: 8px !important;
+                letter-spacing: 1.5px !important;
+                text-shadow: 0 1px 4px rgba(0,0,0,0.8);
             }
-            #hint { display: none; }
+            #hint { 
+                display: none; 
+            }
             #settings-panel {
                 top: auto !important;
                 bottom: 20px !important;
