@@ -572,7 +572,7 @@
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 200);
-        camera.position.set(0, 0, 25);
+        camera.position.set(0, 0, 30);
 
         // Binding to domElement specifically isolates the canvas controls from intersecting the Glassmorphic UI 
         const controls = new OrbitControls(camera, renderer.domElement);
@@ -580,7 +580,7 @@
         controls.dampingFactor = 0.05;
         controls.enablePan = false;
         controls.minDistance = 6;
-        controls.maxDistance = 16;
+        controls.maxDistance = 35;
         controls.enabled = false; // Intentionally kept disabled while the cinematic intro finishes
 
         // --- Asset Loading ---
@@ -601,7 +601,9 @@
             loader.style.opacity = '0';
             setTimeout(() => {
                 loader.style.display = 'none';
-                targetCameraPos.set(0, 0, 13);
+                // Check if mobile - start further out for better full-globe view
+                const isMobile = window.innerWidth <= 768;
+                targetCameraPos.set(0, 0, isMobile ? 18 : 13);
                 isAnimatingCamera = true;
             }, 1200);
         };
@@ -939,6 +941,28 @@
         const tempWorldPos = new THREE.Vector3();
         const tempDir = new THREE.Vector3();
         const tempCamDir = new THREE.Vector3();
+
+        // --- Mobile Optimization: Wider FOV for better full-globe view ---
+        function updateMobileCamera() {
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+                camera.fov = 60; // Wider FOV on mobile
+                controls.maxDistance = 45; // More zoom out room
+            } else {
+                camera.fov = 45;
+                controls.maxDistance = 35;
+            }
+            camera.updateProjectionMatrix();
+        }
+        
+        // Initial check
+        updateMobileCamera();
+        
+        // Update on resize
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            updateMobileCamera();
+        });
 
         // --- Main Render Loop ---
         const clock = new THREE.Clock();
