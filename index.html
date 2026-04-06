@@ -264,6 +264,50 @@
             color: rgba(255, 255, 255, 0.7);
             cursor: pointer;
         }
+        .settings-toggle-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 300;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 100;
+        }
+        .settings-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: rotate(90deg);
+        }
+        #settings-panel.minimized {
+            padding: 12px 24px !important;
+            width: auto !important;
+            min-width: 50px;
+        }
+        #settings-panel.minimized .settings-title,
+        #settings-panel.minimized .slider-group,
+        #settings-panel.minimized .checkbox-group {
+            display: none;
+        }
+        #settings-panel.minimized .settings-toggle-btn {
+            position: static;
+            transform: rotate(0);
+        }
+        #settings-panel.minimized .settings-toggle-btn::after {
+            content: '⚙';
+            font-size: 18px;
+        }
+        #settings-panel.minimized .settings-toggle-btn span {
+            display: none;
+        }
         /* === Apple-Style Glassmorphism Info Card === */
         #info-card {
             position: absolute;
@@ -366,13 +410,22 @@
             #hint { display: none; }
             #settings-panel {
                 top: auto !important;
-                bottom: 80px !important;
-                right: 50% !important;
-                transform: translateX(50%) !important;
-                width: calc(100vw - 40px) !important;
-                max-width: 320px !important;
+                bottom: 20px !important;
+                right: 20px !important;
+                left: 20px !important;
+                transform: none !important;
+                width: calc(100% - 40px) !important;
+                max-width: none !important;
                 padding: 16px !important;
                 border-radius: 16px !important;
+            }
+            #settings-panel.minimized {
+                position: fixed !important;
+                bottom: 20px !important;
+                right: 20px !important;
+                left: auto !important;
+                width: 50px !important;
+                padding: 12px !important;
             }
             .settings-title {
                 font-size: 10px !important;
@@ -395,7 +448,7 @@
             #info-card {
                 width: calc(100% - 40px) !important;
                 right: 20px !important;
-                bottom: 20px !important;
+                bottom: 80px !important;
                 left: 20px !important;
                 padding: 20px !important;
             }
@@ -429,6 +482,7 @@
             </div>
             
             <div id="settings-panel">
+                <button id="settings-toggle" class="settings-toggle-btn">&times;</button>
                 <div class="settings-title">Display Settings</div>
                 <div class="slider-group">
                     <div class="slider-label">
@@ -856,6 +910,14 @@
 
         starsCheck.addEventListener('change', (e) => {
             if(starsMesh) starsMesh.visible = e.target.checked;
+        });
+
+        // Settings Panel Toggle (Minimize/Expand)
+        const settingsToggle = document.getElementById('settings-toggle');
+        const settingsPanel = document.getElementById('settings-panel');
+        settingsToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            settingsPanel.classList.toggle('minimized');
         });
 
         // Globally scope layout vectors prior to the frame loop to skip Garbage Collection dumps
